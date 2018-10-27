@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {BrowserRouter as Route, NavLink} from "react-router-dom";
+import {BrowserRouter as Switch, Route, NavLink} from "react-router-dom";
 
 
 import './App.css';
@@ -26,8 +26,12 @@ class App extends Component {
   // add any needed code to ensure that the smurfs collection exists on state and it has data coming from the server
   // Notice what your map function is looping over and returning inside of Smurfs.
   // You'll need to make sure you have the right properties on state and pass them down to props.
-  render() {
+  render(){
+  const {smurfs} = this.state.smurfs
+
+
     return (
+      <Switch>
       <div className="App">
         <ul className="navbar">
           <li>
@@ -36,16 +40,17 @@ class App extends Component {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/avengers" activeClassName="activeNavButton">
+            <NavLink to="/smurfform" activeClassName="activeNavButton">
               Smurfs
             </NavLink>
           </li>
         </ul>
-        <Route exact path="/" component={Smurfs} />
-          <Route exact path="/smurfform" render={props => ( <SmurfForm {...props} smurf={this.state.smurfs} /> )} />
+        <Route exact path="/" component={Smurfs} render={props => ( <Smurfs {...props} smurfs={this.state.smurfs} /> )} />
+          <Route exact path="/smurfform" component={SmurfForm}/>
 
 
       </div>
+    </Switch>
     );
   }
 }
